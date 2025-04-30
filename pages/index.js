@@ -4,6 +4,7 @@ import { useState } from 'react';
 import StockTable from '../components/StockTable';
 import InvestmentForm from '../components/InvestmentForm';
 import StockCharts from '../components/StockCharts';
+import StrategyBox from '../components/StrategyBox';
 
 export default function Home() {
   const [selectedStock, setSelectedStock] = useState(null);
@@ -12,7 +13,6 @@ export default function Home() {
   const handleAnalyze = (symbol, amount) => {
     setSelectedStock(symbol);
     setInvestment(amount);
-    console.log('Analyzing:', symbol, '$' + amount);
   };
 
   return (
@@ -26,8 +26,8 @@ export default function Home() {
         style={{
           display: 'grid',
           gridTemplateColumns: '10% 40% 40% 10%',
-          minHeight: '100vh',
           backgroundColor: '#f5f5f5',
+          minHeight: '100vh',
           fontFamily: 'Bahnschrift, sans-serif',
         }}
       >
@@ -75,7 +75,7 @@ export default function Home() {
             <div>🇺🇸 USD/ILS</div>
           </div>
 
-          {/* Stock Selector + Real-Time Table */}
+          {/* Stock Selector + Table */}
           <InvestmentForm onAnalyze={handleAnalyze} />
           <StockTable />
         </div>
@@ -88,7 +88,6 @@ export default function Home() {
               padding: '20px',
               borderRadius: '10px',
               boxShadow: '0 0 5px rgba(0,0,0,0.1)',
-              minHeight: '300px',
             }}
           >
             <h2 style={{ fontSize: '24px', color: '#231F20' }}>
@@ -98,11 +97,12 @@ export default function Home() {
             </h2>
 
             {selectedStock ? (
-              <StockCharts symbol={selectedStock} />
+              <>
+                <StockCharts symbol={selectedStock} />
+                <StrategyBox symbol={selectedStock} investment={investment} />
+              </>
             ) : (
-              <p>
-                Please select a stock and investment amount, then click <strong>Analyze</strong>.
-              </p>
+              <p>Please select a stock and click "Analyze" to begin.</p>
             )}
           </div>
         </div>
