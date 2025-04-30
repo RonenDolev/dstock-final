@@ -4,39 +4,52 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Stock Analysis Generator</title>
+        <title>DStock - Stock Analysis Generator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* Full 10%–40%–40%–10% Grid */}
       <main
         style={{
           display: 'grid',
           gridTemplateColumns: '10% 40% 40% 10%',
-          backgroundColor: '#f0f0f0',
+          backgroundColor: '#f5f5f5',
           fontFamily: 'Bahnschrift, sans-serif',
           minHeight: '100vh',
           padding: 0,
-          margin: 0
+          margin: 0,
         }}
       >
-        {/* Left Margin */}
+        {/* Left margin */}
         <div></div>
 
-        {/* Left Content */}
+        {/* Left panel */}
         <div style={{ padding: '20px' }}>
-          <h1 style={{ fontSize: '60px', color: '#231F20' }}>
+          <h1 style={{ fontSize: '60px', color: '#231F20', marginBottom: '20px' }}>
             Stock Analysis Generator
           </h1>
-          <p>← This is your left panel content: selector, input field, real-time stock table, etc.</p>
+          <p>This panel will include:</p>
+          <ul>
+            <li>🔍 Stock selector dropdown</li>
+            <li>💵 Investment amount input</li>
+            <li>📈 Real-time stock table</li>
+            <li>▶️ Analyze button</li>
+          </ul>
         </div>
 
-        {/* Right Content */}
-        <div style={{ padding: '20px', backgroundColor: '#ffffff', borderRadius: '8px' }}>
-          <h2 style={{ fontSize: '24px', color: '#231F20' }}>Live Chart & Investment Strategy</h2>
-          <p>This panel is where you'll display candlestick chart, trend, strategy, and performance.</p>
+        {/* Right panel */}
+        <div style={{ padding: '20px', backgroundColor: '#ffffff', borderRadius: '10px' }}>
+          <h2 style={{ fontSize: '24px', color: '#231F20', marginBottom: '10px' }}>
+            Charts & Investment Strategy
+          </h2>
+          <p>This panel will show:</p>
+          <ul>
+            <li>📊 Candlestick Chart</li>
+            <li>📉 Price Trend Chart</li>
+            <li>📘 Strategy with expected returns</li>
+          </ul>
         </div>
 
-        {/* Right Margin */}
+        {/* Right margin */}
         <div></div>
       </main>
     </>
