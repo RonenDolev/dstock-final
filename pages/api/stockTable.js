@@ -16,6 +16,17 @@ const TICKERS = [
   'WDAY', 'TEAM', 'BIDU', 'NXPI', 'PDD',
   'JD', 'ZS', 'MRNA', 'ILMN', 'TTD',
   'SNPS', 'ORLY', 'CTSH', 'KLAC', 'CHKP'
+  'JPM', 'V', 'MA', 'UNH', 'ORCL'
+  'JNJ', 'PG', 'ABBV', 'HD', 'BAC'
+  'CVX', 'WFC', 'ABT', 'KO', 'MRK'
+  'PFE', 'TMO', 'CMCSA', 'DIS', 'ACN'
+  'ASML', 'TM', 'TSM', 'SIEGY', 'RMS.PA'
+  'SAP', 'AZN', 'NESN.SW', 'SHELL', 'HSBC'
+  'BABA', 'LVMUY', 'TCEHY', 'NVO', 'ORAN'
+  'SNY', 'ROG.SW', 'BP', 'RELX', 'UL'
+  'SHEL', 'XOM', 'BNPQY', 'TD', 'RY'
+  'C', 'MS', 'GS', 'AXP', 'NEE'
+  'SO'
 ];
 
 // Keep a persistent rotating index across requests

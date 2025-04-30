@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import StockTable from '../components/StockTable';
 import InvestmentForm from '../components/InvestmentForm';
+import StockCharts from '../components/StockCharts';
 
 export default function Home() {
   const [selectedStock, setSelectedStock] = useState(null);
@@ -12,7 +13,6 @@ export default function Home() {
     setSelectedStock(symbol);
     setInvestment(amount);
     console.log('Analyzing:', symbol, '$' + amount);
-    // In the next step, we’ll show chart + strategy based on this
   };
 
   return (
@@ -31,11 +31,12 @@ export default function Home() {
           fontFamily: 'Bahnschrift, sans-serif',
         }}
       >
+        {/* Left margin */}
         <div></div>
 
-        {/* Left Panel */}
+        {/* Left Column */}
         <div style={{ padding: '20px' }}>
-          {/* Header */}
+          {/* Logo and Title */}
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
             <Image
               src="/logo.png"
@@ -74,12 +75,12 @@ export default function Home() {
             <div>🇺🇸 USD/ILS</div>
           </div>
 
-          {/* Selector & Real-Time Table */}
+          {/* Stock Selector + Real-Time Table */}
           <InvestmentForm onAnalyze={handleAnalyze} />
           <StockTable />
         </div>
 
-        {/* Right Panel */}
+        {/* Right Column */}
         <div style={{ padding: '20px' }}>
           <div
             style={{
@@ -95,14 +96,18 @@ export default function Home() {
                 ? `📊 Analysis for ${selectedStock} ($${investment})`
                 : '📊 Chart & Strategy Area'}
             </h2>
-            <p>
-              {selectedStock
-                ? 'Coming next: candlestick chart, trend chart, and investment strategy result.'
-                : 'Please select a stock and investment amount, then click Analyze.'}
-            </p>
+
+            {selectedStock ? (
+              <StockCharts symbol={selectedStock} />
+            ) : (
+              <p>
+                Please select a stock and investment amount, then click <strong>Analyze</strong>.
+              </p>
+            )}
           </div>
         </div>
 
+        {/* Right margin */}
         <div></div>
       </main>
     </>
