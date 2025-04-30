@@ -1,8 +1,20 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useState } from 'react';
 import StockTable from '../components/StockTable';
+import InvestmentForm from '../components/InvestmentForm';
 
 export default function Home() {
+  const [selectedStock, setSelectedStock] = useState(null);
+  const [investment, setInvestment] = useState(100);
+
+  const handleAnalyze = (symbol, amount) => {
+    setSelectedStock(symbol);
+    setInvestment(amount);
+    console.log('Analyzing:', symbol, '$' + amount);
+    // In the next step, we’ll show chart + strategy based on this
+  };
+
   return (
     <>
       <Head>
@@ -10,7 +22,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      {/* Page Grid: 10% | 40% | 40% | 10% */}
       <main
         style={{
           display: 'grid',
@@ -20,12 +31,11 @@ export default function Home() {
           fontFamily: 'Bahnschrift, sans-serif',
         }}
       >
-        {/* Left Margin */}
         <div></div>
 
         {/* Left Panel */}
         <div style={{ padding: '20px' }}>
-          {/* Header Row */}
+          {/* Header */}
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
             <Image
               src="/logo.png"
@@ -64,7 +74,8 @@ export default function Home() {
             <div>🇺🇸 USD/ILS</div>
           </div>
 
-          {/* Real-Time Table */}
+          {/* Selector & Real-Time Table */}
+          <InvestmentForm onAnalyze={handleAnalyze} />
           <StockTable />
         </div>
 
@@ -76,16 +87,22 @@ export default function Home() {
               padding: '20px',
               borderRadius: '10px',
               boxShadow: '0 0 5px rgba(0,0,0,0.1)',
+              minHeight: '300px',
             }}
           >
             <h2 style={{ fontSize: '24px', color: '#231F20' }}>
-              📊 Chart & Strategy Area (Coming Next)
+              {selectedStock
+                ? `📊 Analysis for ${selectedStock} ($${investment})`
+                : '📊 Chart & Strategy Area'}
             </h2>
-            <p>This section will include candlestick chart, trend chart, and strategy output.</p>
+            <p>
+              {selectedStock
+                ? 'Coming next: candlestick chart, trend chart, and investment strategy result.'
+                : 'Please select a stock and investment amount, then click Analyze.'}
+            </p>
           </div>
         </div>
 
-        {/* Right Margin */}
         <div></div>
       </main>
     </>
