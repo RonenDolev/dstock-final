@@ -1,10 +1,11 @@
 import Head from 'next/head';
+import StockTable from '../components/StockTable';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>DStock - Stock Analysis Generator</title>
+        <title>Stock Analysis Generator</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
@@ -27,26 +28,16 @@ export default function Home() {
           <h1 style={{ fontSize: '60px', color: '#231F20', marginBottom: '20px' }}>
             Stock Analysis Generator
           </h1>
-          <p>This panel will include:</p>
-          <ul>
-            <li>🔍 Stock selector dropdown</li>
-            <li>💵 Investment amount input</li>
-            <li>📈 Real-time stock table</li>
-            <li>▶️ Analyze button</li>
-          </ul>
+
+          <StockTable />
         </div>
 
         {/* Right panel */}
         <div style={{ padding: '20px', backgroundColor: '#ffffff', borderRadius: '10px' }}>
           <h2 style={{ fontSize: '24px', color: '#231F20', marginBottom: '10px' }}>
-            Charts & Investment Strategy
+            📊 Chart & Strategy Area (Coming Next)
           </h2>
-          <p>This panel will show:</p>
-          <ul>
-            <li>📊 Candlestick Chart</li>
-            <li>📉 Price Trend Chart</li>
-            <li>📘 Strategy with expected returns</li>
-          </ul>
+          <p>This will display selected stock candlestick chart and investment strategy info.</p>
         </div>
 
         {/* Right margin */}

@@ -1,36 +1,33 @@
 import useSWR from 'swr';
-import axios from 'axios';
 
-const fetcher = (url) => axios.get(url).then(res => res.data);
+const fetcher = url => fetch(url).then(res => res.json());
 
 export default function StockTable() {
-  const { data, error } = useSWR('/api/stockTable', fetcher, { refreshInterval: 300000 });
+  const { data, error, isLoading } = useSWR('/api/stockTable', fetcher, {
+    refreshInterval: 60000, // 60 seconds
+  });
 
-  if (error) return <div>Failed to load stock data.</div>;
-  if (!data) return <div>Loading stock data...</div>;
+  if (error) return <p style={{ color: 'red' }}>❌ Failed to load stock data.</p>;
+  if (isLoading) return <p>Loading stock data...</p>;
 
   return (
-    <div style={{ marginTop: '30px' }}>
-      <h2 className="NormalCharacterStyle1">Real-Time US Stocks</h2>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
+    <div style={{ marginTop: '20px' }}>
+      <h2 style={{ fontSize: '24px', color: '#231F20' }}>📈 Live NASDAQ Stocks</h2>
+      <table style={{ width: '100%', fontSize: '14px', fontFamily: 'Bahnschrift', borderCollapse: 'collapse' }}>
         <thead>
-          <tr>
-            <th style={{ textAlign: 'left', padding: '8px', borderBottom: '1px solid #ccc' }}>Symbol</th>
-            <th style={{ textAlign: 'left', padding: '8px', borderBottom: '1px solid #ccc' }}>Price</th>
-            <th style={{ textAlign: 'left', padding: '8px', borderBottom: '1px solid #ccc' }}>Trend</th>
+          <tr style={{ borderBottom: '1px solid #ccc' }}>
+            <th align="left">Symbol</th>
+            <th align="left">Price</th>
+            <th align="left">Trend</th>
           </tr>
         </thead>
         <tbody>
-          {data.map(stock => (
+          {data.map((stock) => (
             <tr key={stock.symbol}>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>{stock.symbol}</td>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>${stock.price.toFixed(2)}</td>
-              <td style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
-                {stock.trend === 'up' ? (
-                  <span style={{ color: 'green' }}>▲</span>
-                ) : (
-                  <span style={{ color: 'red' }}>▼</span>
-                )}
+              <td>{stock.symbol}</td>
+              <td>${stock.price.toFixed(2)}</td>
+              <td style={{ color: stock.trend === 'up' ? '#008A40' : '#B92027' }}>
+                {stock.trend === 'up' ? '🔼' : '🔽'}
               </td>
             </tr>
           ))}
